@@ -1,0 +1,23 @@
+{
+  "name": "extra-context",
+  "displayName": "Extra Context",
+  "description": "Add a few context variables for the when clause of key bindings",
+  "publisher": "rioj7",
+  "license": "MIT",
+  "version": "0.1.0",
+  "engines": {"vscode": "^1.37.0"},
+  "categories": ["Other"],
+  "keywords": ["context","keybinding","when"],
+  "icon": "images/icon.png",
+  "galleryBanner": {"color": "#000080", "theme": "dark"},
+  "activationEvents": [ "*" ],
+  "main": "./extension.js",
+  "homepage": "https://github.com/rioj7/extra-context",
+  "bugs": {
+    "url": "https://github.com/rioj7/extra-context/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rioj7/extra-context.git"
+  }
+}
