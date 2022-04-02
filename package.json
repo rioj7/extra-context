@@ -1,17 +1,51 @@
 {
   "name": "extra-context",
   "displayName": "Extra Context",
-  "description": "Add a few context variables for the when clause of key bindings",
+  "description": "Add a few context variables for the when clause of key bindings. And set or toggle your own",
   "publisher": "rioj7",
   "license": "MIT",
-  "version": "0.1.0",
-  "engines": {"vscode": "^1.37.0"},
+  "version": "0.2.0",
+  "engines": {"vscode": "^1.60.0"},
   "categories": ["Other"],
-  "keywords": ["context","keybinding","when"],
+  "keywords": ["context","keybinding","when","variable","create","set"],
   "icon": "images/icon.png",
   "galleryBanner": {"color": "#000080", "theme": "dark"},
   "activationEvents": [ "*" ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "extra-context.setVariable",
+        "title": "Set a context variable to a value",
+        "category": "Extra Context"
+      },
+      {
+        "command": "extra-context.toggleVariable",
+        "title": "Toggle a context variable true/false value",
+        "category": "Extra Context"
+      }
+    ],
+    "configuration":{
+      "title": "Extra Context",
+      "properties": {
+        "extra-context.toggleVariables": {
+          "type": "array",
+          "scope": "resource",
+          "description": "Array of QuickPickItems with \"name\" property of context variables we can toggle",
+          "items": { "type": "object"},
+          "default": []
+        },
+        "extra-context.setVariables": {
+          "type": "array",
+          "scope": "resource",
+          "description": "Array of QuickPickItems with \"name\" and \"value\" property of context variables we can set",
+          "items": { "type": "object"},
+          "default": []
+        }
+      }
+    }
+  },
   "main": "./extension.js",
+  "browser": "./extension.js",
   "homepage": "https://github.com/rioj7/extra-context",
   "bugs": {
     "url": "https://github.com/rioj7/extra-context/issues"
