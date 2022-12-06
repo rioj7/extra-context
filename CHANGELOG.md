@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.4.0] 2022-12-06
+### Added
+- `extraContext:editorCursorNextChar`
+
 ## [0.3.0] 2022-08-05
 ### Added
 - `extraContext:editorSelectionStartVisible`

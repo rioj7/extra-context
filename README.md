@@ -9,6 +9,7 @@ The following extra context variables are set:
 * `extraContext:editorSelectionStartVisible` : boolean that is true if the selection start is visible **(*)**
 * `extraContext:editorSelectionStartLineRelativeVisibleTop` : number: selection start line relative to visible range top (0 is first visible line) **(*)**
 * `extraContext:editorSelectionStartLineRelativeVisibleBottom` : number: selection start line relative to visible range bottom (0 is last visible line) **(*)**
+* `extraContext:editorCursorNextChar` : string: the character after the **active** position (cursor) of the first selection. The empty string when the active position is at the end of a line.
 
  **(*)** Due to a [bug in Visual Studio Code](https://github.com/microsoft/vscode/issues/157194) the visible range is not correctly updated for `cursorPageDown` and `cursorPageUp` command.
 
@@ -55,6 +56,20 @@ In `keybindings.json`:
     "key": "ctrl+k f5",
     "command": "multiCommand.terminalMultipleLine",
     "when": "editorTextFocus && extraContext:editorSelectionHasMultipleLines"
+  }
+```
+
+# editorCursorNextChar
+
+You can select different commands for a key binding based on the character to the right of the **active** position (cursor) of the first selection.
+
+If you do not want to insert a tab, or insert spaces to the next tab stop, when the cursor is before a `]` character use:
+
+```json
+  {
+    "key": "tab",
+    "command": "cursorRight",
+    "when": "editorTextFocus && extraContext:editorCursorNextChar == ']'"
   }
 ```
 
