@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.4.1] 2022-12-09
+### Modified
+- proper use of editor.visibleRange
+
 ## [0.4.0] 2022-12-06
 ### Added
 - `extraContext:editorCursorNextChar`

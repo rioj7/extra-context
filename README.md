@@ -7,11 +7,9 @@ The following extra context variables are set:
 * `extraContext:editorSelectionEndLine` : the end line of the selection as a string
 * `extraContext:editorSelectionHasMultipleLines` : boolean that is true if the selection spans multiple lines
 * `extraContext:editorSelectionStartVisible` : boolean that is true if the selection start is visible **(*)**
-* `extraContext:editorSelectionStartLineRelativeVisibleTop` : number: selection start line relative to visible range top (0 is first visible line) **(*)**
-* `extraContext:editorSelectionStartLineRelativeVisibleBottom` : number: selection start line relative to visible range bottom (0 is last visible line) **(*)**
+* `extraContext:editorSelectionStartLineRelativeVisibleTop` : number: selection start line relative to visible range top (0 is first visible line)
+* `extraContext:editorSelectionStartLineRelativeVisibleBottom` : number: selection start line relative to visible range bottom (0 is last visible line)
 * `extraContext:editorCursorNextChar` : string: the character after the **active** position (cursor) of the first selection. The empty string when the active position is at the end of a line.
-
- **(*)** Due to a [bug in Visual Studio Code](https://github.com/microsoft/vscode/issues/157194) the visible range is not correctly updated for `cursorPageDown` and `cursorPageUp` command.
 
 # editorSelectionHasMultipleLines
 

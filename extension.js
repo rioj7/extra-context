@@ -38,22 +38,31 @@ function getCharAtPosition(editor, pos) {
 }
 
 function activate(context) {
-  function editorExtraContext(editor) {
+  function editorExtraContextAll(editor) {
+    editorExtraContextSelection(editor);
+    editorExtraContextVisibleRange(editor);
+  }
+  function editorExtraContextSelection(editor) {
     if (editor === undefined) { return; }
     vscode.commands.executeCommand('setContext', 'extraContext:editorSelectionStartLine', String(editor.selection.start.line+1));
     vscode.commands.executeCommand('setContext', 'extraContext:editorSelectionEndLine', String(editor.selection.end.line+1));
     vscode.commands.executeCommand('setContext', 'extraContext:editorSelectionHasMultipleLines', editor.selection.start.line !== editor.selection.end.line);
     vscode.commands.executeCommand('setContext', 'extraContext:editorCursorNextChar', getCharAtPosition(editor, editor.selection.active));
+    editorExtraContextVisibleRange(editor);
+  }
+  function editorExtraContextVisibleRange(editor) {
+    if (editor === undefined) { return; }
     if (editor.visibleRanges.length === 1) {
       let visibleRange = editor.visibleRanges[0];
       vscode.commands.executeCommand('setContext', 'extraContext:editorSelectionStartVisible', visibleRange.contains(editor.selection.start));
       vscode.commands.executeCommand('setContext', 'extraContext:editorSelectionStartLineRelativeVisibleTop', editor.selection.start.line - visibleRange.start.line);
       vscode.commands.executeCommand('setContext', 'extraContext:editorSelectionStartLineRelativeVisibleBottom', visibleRange.end.line - editor.selection.start.line);
     }
-  };
-  vscode.window.onDidChangeTextEditorSelection( changeEvent => { editorExtraContext(changeEvent.textEditor); }, null, context.subscriptions);
-  vscode.window.onDidChangeActiveTextEditor( editor => { editorExtraContext(editor); }, null, context.subscriptions);
-  editorExtraContext(vscode.window.activeTextEditor);
+  }
+  vscode.window.onDidChangeTextEditorSelection( changeEvent => { editorExtraContextSelection(changeEvent.textEditor); }, null, context.subscriptions);
+  vscode.window.onDidChangeActiveTextEditor( editor => { editorExtraContextAll(editor); }, null, context.subscriptions);
+  vscode.window.onDidChangeTextEditorVisibleRanges( changeEvent => { editorExtraContextVisibleRange(changeEvent.textEditor); }, null, context.subscriptions);
+  editorExtraContextAll(vscode.window.activeTextEditor);
   context.subscriptions.push(vscode.commands.registerCommand('extra-context.setVariable', async args => {
     let [name, value] = await getQuickPickNameValue('setVariables', args);
       if (name === undefined || value === undefined) { return; }
