@@ -44,7 +44,7 @@ In `settings.json`:
 
 In `keybindings.json`:
 
-``` json
+``` jsonc
   {
     "key": "ctrl+k f5", // or any other key combo
     "command": "multiCommand.terminalSingleLine",
@@ -126,6 +126,37 @@ With the command **Extra Context: Toggle a context variable true/false value** (
 * `name` : The name of the property to toggle
 
 If the command argument is not defined or the command is called from the Command Palette you are presented with a QuickPick list to choose a predefined variable. The predefined options are taken from the `extra-context.toggleVariables` setting. The `name` defined in the picked item is used.
+
+VSC does not have a context variable that keeps track if everything is folded. With the following key bindings you can use the same key binding to fold/unfold everything.
+
+```json
+{
+    "key": "ctrl+m",
+    "when": "editorTextFocus && foldingEnabled && !extraContext:isFolded",
+    "command": "extension.multiCommand.execute",
+    "args": { 
+        "sequence": [
+            "editor.foldAll",
+            { "command": "extra-context.toggleVariable",
+              "args": { "name": "isFolded" }
+            }
+        ]
+    }
+},
+{
+    "key": "ctrl+m",
+    "when": "editorTextFocus && foldingEnabled && extraContext:isFolded",
+    "command": "extension.multiCommand.execute",
+    "args": { 
+        "sequence": [
+            "editor.unfoldAll",
+            { "command": "extra-context.toggleVariable",
+              "args": { "name": "isFolded" }
+            }
+        ]
+    }
+}
+```
 
 # Settings
 
