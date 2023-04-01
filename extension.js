@@ -42,10 +42,13 @@ function activate(context) {
     editorExtraContextSelection(editor);
     editorExtraContextVisibleRange(editor);
   }
+  /** @param {vscode.TextEditor} editor */
   function editorExtraContextSelection(editor) {
     if (editor === undefined) { return; }
     vscode.commands.executeCommand('setContext', 'extraContext:editorSelectionStartLine', String(editor.selection.start.line+1));
+    vscode.commands.executeCommand('setContext', 'extraContext:editorSelectionStartCharacter', String(editor.selection.start.character+1));
     vscode.commands.executeCommand('setContext', 'extraContext:editorSelectionEndLine', String(editor.selection.end.line+1));
+    vscode.commands.executeCommand('setContext', 'extraContext:editorSelectionEndCharacter', String(editor.selection.end.character+1));
     vscode.commands.executeCommand('setContext', 'extraContext:editorSelectionHasMultipleLines', editor.selection.start.line !== editor.selection.end.line);
     vscode.commands.executeCommand('setContext', 'extraContext:editorCursorNextChar', getCharAtPosition(editor, editor.selection.active));
     editorExtraContextVisibleRange(editor);

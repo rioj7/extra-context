@@ -4,7 +4,7 @@
   "description": "Add a few context variables for the when clause of key bindings. And set or toggle your own",
   "publisher": "rioj7",
   "license": "MIT",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "engines": {"vscode": "^1.62.0"},
   "categories": ["Other"],
   "keywords": ["context","keybinding","when","variable","create","set"],

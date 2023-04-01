@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.5.0] 2023-04-01
+### Added
+- `extraContext:editorSelectionStartCharacter` and `extraContext:editorSelectionEndCharacter`
+
 ## [0.4.1] 2022-12-09
 ### Modified
 - proper use of editor.visibleRange

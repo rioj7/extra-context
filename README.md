@@ -4,12 +4,55 @@ Add a few extra context variables to be used in key binding `when` clause. Or se
 The following extra context variables are set:
 
 * `extraContext:editorSelectionStartLine` : the start line of the selection as a string
+* `extraContext:editorSelectionStartCharacter` : the start character of the selection as a string
 * `extraContext:editorSelectionEndLine` : the end line of the selection as a string
+* `extraContext:editorSelectionEndCharacter` : the end character of the selection as a string
 * `extraContext:editorSelectionHasMultipleLines` : boolean that is true if the selection spans multiple lines
 * `extraContext:editorSelectionStartVisible` : boolean that is true if the selection start is visible **(*)**
 * `extraContext:editorSelectionStartLineRelativeVisibleTop` : number: selection start line relative to visible range top (0 is first visible line)
 * `extraContext:editorSelectionStartLineRelativeVisibleBottom` : number: selection start line relative to visible range bottom (0 is last visible line)
 * `extraContext:editorCursorNextChar` : string: the character after the **active** position (cursor) of the first selection. The empty string when the active position is at the end of a line.
+
+# editorSelectionEndCharacter
+
+If the editor contains a script for the current terminal and you want to send the current line or current selection to the terminal you can use these 3 key bindings.
+
+All keybindings use the **same key combo**.
+
+Using the `when` clause we make the selection which command is executed. They have to be defined in **this** order in `keybindings.json`:
+
+The example uses the extension [Command Variable](https://marketplace.visualstudio.com/items?itemName=rioj7.command-variable#interminal).
+
+```jsonc
+  {
+    "key": "ctrl+i f5",  // or any other combo
+    "command": "extension.commandvariable.inTerminal",
+    "args": {
+      "command": "extension.commandvariable.transform",
+      "args": { "text": "${selectedText}" },
+      "addCR": true
+    },
+    "when": "editorTextFocus && editorHasSelection"
+  },
+  {
+    "key": "ctrl+i f5",  // or any other combo
+    "command": "extension.commandvariable.inTerminal",
+    "args": {
+      "command": "extension.commandvariable.transform",
+      "args": { "text": "${selectedText}" },
+    },
+    "when": "editorTextFocus && editorHasSelection && extraContext:editorSelectionEndCharacter == '1'"
+  },
+  {
+    "key": "ctrl+i f5",  // or any other combo
+    "command": "extension.commandvariable.inTerminal",
+    "args": {
+      "command": "extension.commandvariable.currentLineText",
+      "addCR": true
+    },
+    "when": "editorTextFocus && !editorHasSelection"
+  }
+```
 
 # editorSelectionHasMultipleLines
 
