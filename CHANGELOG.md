@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.6.0] 2023-07-06
+### Added
+- `extraContext:editorCursorPreviousChar`
+
 ## [0.5.0] 2023-04-01
 ### Added
 - `extraContext:editorSelectionStartCharacter` and `extraContext:editorSelectionEndCharacter`

@@ -12,6 +12,7 @@ The following extra context variables are set:
 * `extraContext:editorSelectionStartLineRelativeVisibleTop` : number: selection start line relative to visible range top (0 is first visible line)
 * `extraContext:editorSelectionStartLineRelativeVisibleBottom` : number: selection start line relative to visible range bottom (0 is last visible line)
 * `extraContext:editorCursorNextChar` : string: the character after the **active** position (cursor) of the first selection. The empty string when the active position is at the end of a line.
+* `extraContext:editorCursorPreviousChar` : string: the character before the **active** position (cursor) of the first selection. The empty string when the active position is at the start of a line.
 
 # editorSelectionEndCharacter
 

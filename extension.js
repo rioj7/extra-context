@@ -33,8 +33,10 @@ async function getQuickPickNameValue(configName, args) {
 }
 
 /** @param {vscode.TextEditor} editor @param {vscode.Position} pos */
-function getCharAtPosition(editor, pos) {
-  return editor.document.lineAt(pos.line).text.substring(pos.character, pos.character+1);
+function getCharAtPosition(editor, pos, offset = 0) {
+  let character = pos.character + offset;
+  if (character < 0) { return ''; }
+  return editor.document.lineAt(pos.line).text.substring(character, character+1);
 }
 
 function activate(context) {
@@ -51,6 +53,7 @@ function activate(context) {
     vscode.commands.executeCommand('setContext', 'extraContext:editorSelectionEndCharacter', String(editor.selection.end.character+1));
     vscode.commands.executeCommand('setContext', 'extraContext:editorSelectionHasMultipleLines', editor.selection.start.line !== editor.selection.end.line);
     vscode.commands.executeCommand('setContext', 'extraContext:editorCursorNextChar', getCharAtPosition(editor, editor.selection.active));
+    vscode.commands.executeCommand('setContext', 'extraContext:editorCursorPreviousChar', getCharAtPosition(editor, editor.selection.active, -1));
     editorExtraContextVisibleRange(editor);
   }
   function editorExtraContextVisibleRange(editor) {
